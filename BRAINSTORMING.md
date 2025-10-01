@@ -89,3 +89,16 @@ Bon bah faut revoir pour les images
 Surement rechercher des liens à la mano;.....
 Et à la mano ça marche... merci Sébastien Druss
 
+Cet aprem on va faire les routes pour les user author et genre
+à faire attention aux imports....
+
+author les controllers importer :  models, sequelize, joi eventuellement
+author les routes importer : le router express, le controller en rapport
+
+user les routes importer : le router express, le controller en rapport
+user les controllers importer :  models, sequelize, joi eventuellement
+
+genre les routes importer : le router express, le controller en rapport
+genre les controllers importer :  models, sequelize, joi eventuellement
+
+et dans l'index.js des controllers, importer tous les controllers
