@@ -102,3 +102,9 @@ genre les routes importer : le router express, le controller en rapport
 genre les controllers importer :  models, sequelize, joi eventuellement
 
 et dans l'index.js des controllers, importer tous les controllers
+
+Schema pour le user ok mais reste basic pour le moment 
+les routes sont ok 
+création user a été compliquée à cause de l'ordre de la dispositon des middlewares des parse !!!!!!!!!
+
+Role à définir , se réferer à ce qui a été fait dans okanban .
