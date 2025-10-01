@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { bookRouter } from "./book.router.js";
 import { authorRouter } from "./author.router.js";
-import { authorController } from "../controllers/author.controller.js";
 import { genreRouter } from "./genre.router.js";
+import { userRouter } from "./user.router.js";
 
 export const apiRouter = Router();
 
@@ -25,4 +25,4 @@ apiRouter.get("/", (req, res) => {
 apiRouter.use(bookRouter); // page d'accueil avec les 10 livres aléatoires
 apiRouter.use(authorRouter);
 apiRouter.use(genreRouter);
-
+apiRouter.use(userRouter);

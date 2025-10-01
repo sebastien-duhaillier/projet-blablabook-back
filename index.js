@@ -18,6 +18,9 @@ app.use(xss());
 // Les CORS ne s'appliquent que dans le cadre d'une API
 app.use(cors());
 
+// middleware pour parser le json en entrée
+app.use(express.json());
+
 // démarrage de l'api
 app.listen(PORT, () => {
    console.log(`BlaBlaBook 📘📗📕 is "reading" 👍 on http://localhost:${PORT}`);
