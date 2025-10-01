@@ -66,4 +66,25 @@ __🤔 on peut gérer l'apport des images seulement en renseignant l'url d'une i
 
    → Changement fait au niveau du "cover"
 
-   
+
+   Pour définir des endpoints API avec Express et Sequelize à partir de tes modèles (User, Book, Author, Genre), tu vas créer des routes qui exposent des opérations comme GET, POST, PUT, DELETE. Voici une structure simple pour démarrer :
+
+
+projet-blablabook-back/
+├── controllers/
+│   ├── book.controller.js
+│   ├── user.controller.js
+│   ├── author.controller.js
+│   └── genre.controller.js
+├── routers/
+│   ├── book.router.js
+│   ├── user.router.js
+│   ├── author.router.js
+│   └── genre.router.js
+├── models/
+│   └── index.js
+├── index.js
+
+Bon bah faut revoir pour les images 
+
+
