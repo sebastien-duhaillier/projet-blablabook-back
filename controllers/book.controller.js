@@ -1,4 +1,5 @@
 import { Book, Author, Genre } from '../models/index.js';
+import { Sequelize } from 'sequelize';
 import Joi from "joi";
 
 
@@ -11,7 +12,8 @@ export const bookController = {
    async getRandomBooks(req, res) {
       try {
          const books = await Book.findAll({
-            limit: 10,
+            order: Sequelize.literal('RANDOM()'),
+            limit: 10
          });
          res.json(books);
       } catch (error) {
@@ -22,7 +24,7 @@ export const bookController = {
 
    async getAllBooks(req, res) {
       try {
-         const books = await Book.findAll({ include: [Author, Genre] });
+         const books = await Book.findAll({});
          res.json(books);
       } catch (error) {
          res.status(500).json({ error: 'Erreur lors de la récupération des livres' });
@@ -33,7 +35,7 @@ export const bookController = {
 
    async getBookById(req, res) {
       try {
-         const book = await Book.findByPk(req.params.id, { include: [Author, Genre] });
+         const book = await Book.findByPk(req.params.id); // Inclure les auteurs et genres associés include: [Author, Genre]
          if (!book) return res.status(404).json({ error: 'Livre non trouvé' });
          res.json(book);
       } catch (error) {

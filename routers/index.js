@@ -19,9 +19,5 @@ apiRouter.get("/", (req, res) => {
 });
 
 
-apiRouter.use("/home", bookRouter); // page d'accueil avec les 10 livres aléatoires
-
-
-
-
+apiRouter.use(bookRouter); // page d'accueil avec les 10 livres aléatoires
 

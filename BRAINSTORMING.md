@@ -86,5 +86,6 @@ projet-blablabook-back/
 ├── index.js
 
 Bon bah faut revoir pour les images 
-
+Surement rechercher des liens à la mano;.....
+Et à la mano ça marche... merci Sébastien Druss
 
