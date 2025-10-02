@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { bookController } from '../controllers/book.controller.js';
-import upload from "../middlewares/upload.middleware.js";
+import upload from "../middlewares/uploadCover.middleware.js";
 
 
 

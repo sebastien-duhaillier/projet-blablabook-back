@@ -6,7 +6,7 @@ import express from "express";
 import cors from "cors";
 import { xss } from "express-xss-sanitizer";
 import { apiRouter } from "./routers/index.js";
-import upload from './middlewares/upload.middleware.js';
+import upload from './middlewares/uploadCover.middleware.js';
 
 
 // 🔧 Initialisation de l'application Express

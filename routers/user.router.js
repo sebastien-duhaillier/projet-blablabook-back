@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { userController } from "../controllers/user.controller.js";
+import avatarUpload from "../middlewares/uploadAvatar.middleware.js";
+import upload from "../middlewares/uploadCover.middleware.js";
 
 export const userRouter = Router();
 
@@ -13,3 +15,4 @@ userRouter.post('/user/login', userController.loginUser);
 // Routes pour ajouter ou supprimer un livre à la bibliothèque d’un utilisateur
 userRouter.delete('/user/:userId/book/:bookId', userController.deleteBookFromUser);
 userRouter.post('/user/:userId/book/:bookId', userController.addBookToUser);
+userRouter.post('/user/:userId/avatar', upload.single('avatar'), userController.userAvatar);
