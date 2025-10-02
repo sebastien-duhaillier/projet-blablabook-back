@@ -62,15 +62,15 @@ __🎯 Nous avons fait les routes basiques pour la MVP__
 
 ## 🥸🤓🧐Les axes de réflexion et différentes tâches à faire pour demain
 
-   __Traîter les "Pull requests".__
+   __❎Traîter les "Pull requests".__
 
-   __Rôles à définir , se réferer à ce qui a été fait dans okanban .__
+   __Rôles à définir , se réferer à ce qui a été fait dans okanban .__ v2
 
-   __En fin de journée, nous nous sommes rendu compte que nous n'avions pas inclus de biographie pour les auteurs, donc à corriger.__
+   __❎En fin de journée, nous nous sommes rendu compte que nous n'avions pas inclus de biographie pour les auteurs, donc à corriger.__
 
-   __Nous devons mettre en place les routes de suppression et ajout d'un livre dans les bibliothèques de chaque "user".__
+   __❎Nous devons mettre en place les routes de suppression et ajout d'un livre dans les bibliothèques de chaque "user".__
 
-   __La gestion de l’upload d’images pour l’avatar de chaque  “user“ doit être finie le 02/10 .__
+   __La gestion de l’upload d’images pour l’avatar de chaque  “user“ doit être finie le 02/10 .__ 
 
    __Les routes d'authentification  :__ 
 
@@ -83,11 +83,19 @@ __🎯 Nous avons fait les routes basiques pour la MVP__
    * PUT /user/avatar pour l'upload, la mise à jour d'un avatar 
    
    * PUT /user/:id/book/:id
+
+   * PUT /user/:id/book/:id
+
+   * JWT à mettre en place aujour'd'hui
+
+   * Faire des tests de connexion front et back
+
+   * mettre en place des tests unitaires 
+
+   * Documentation
+
+   * _Créer DELETE /user, pour la suppression d'un compte (<u>à voir si à faire de suite ou au moment du dernier sprint</u>)_ ,v2
    
-   * _Créer DELETE /user, pour la suppression d'un compte (<u>à voir si à faire de suite ou au moment du dernier sprint</u>)_ ,
-
-
-
 ### 🤯 Les difficultés rencontrés
 
    → Notre test de création de user a été long et éprouvant.... jusqu'à ce qu'on se rende compte que le positionnement des middlewares dans notre point d'entrer du site

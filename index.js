@@ -6,6 +6,8 @@ import express from "express";
 import cors from "cors";
 import { xss } from "express-xss-sanitizer";
 import { apiRouter } from "./routers/index.js";
+import upload from './middlewares/upload.middleware.js';
+
 
 // 🔧 Initialisation de l'application Express
 const PORT = process.env.PORT || 3000;
@@ -31,8 +33,15 @@ app.use(cors());
 // Toutes les routes sont regroupées dans ./routers/index.js
 app.use(apiRouter);
 
+app.use('/uploads', express.static('uploads'));
+
+
 // 🟢 Démarrage du serveur Express
 app.listen(PORT, () => {
    console.log(`BlaBlaBook 📘📗📕 is "reading" 👍 on http://localhost:${PORT}`);
 });
+
+
+
+
 

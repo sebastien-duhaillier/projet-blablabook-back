@@ -12,6 +12,10 @@ Author.init(
       firstname: {
          type: DataTypes.STRING(100),
          allowNull: false,
+      },
+      bio: {
+         type: DataTypes.STRING(500),
+         allowNull: false,
       }
    },
    {
