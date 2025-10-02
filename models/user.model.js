@@ -14,7 +14,7 @@ User.init(
       firstname: {
          type: DataTypes.STRING(50),
          allowNull: false,
-         unique: true, // Contrainte - l'information est unique, personne ne peut créer un compte avec un username déjà existant         
+         unique: false,
       },
       age: {
          type: DataTypes.INTEGER,
