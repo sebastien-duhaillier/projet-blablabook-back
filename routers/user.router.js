@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userController } from "../controllers/user.controller.js";
+import { userController } from "../controllers/index.js";
 import avatarUpload from "../middlewares/uploadAvatar.middleware.js";
 import upload from "../middlewares/uploadCover.middleware.js";
 

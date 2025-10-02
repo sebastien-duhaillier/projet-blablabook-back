@@ -71,6 +71,8 @@ __🎯 Nous avons fait les routes basiques pour la MVP__
    __❎Nous devons mettre en place les routes de suppression et ajout d'un livre dans les bibliothèques de chaque "user".__
 
    __La gestion de l’upload d’images pour l’avatar de chaque  “user“ doit être finie le 02/10 .__ 
+   
+   __Renommage de la route book/home__ 
 
    __Les routes d'authentification  :__ 
 
@@ -107,25 +109,30 @@ __🎯 Nous avons fait les routes basiques pour la MVP__
 
 ## 02/10/2025
 
-   __🎯 __   
-      →
+   __🎯 Import de multer pour la gestion des imports de photos de couverture et avatar des user__   
+      
+      → Encore à travailler du côté des avatars
 
-   __🎯 __   
-      →
+   __🎯 Jonction Front et Back bien démarrée__   
+      → On réussi à afficher des images et des données de la BDD
        
-   __🎯 __   
+   __🎯 On réussi à aller au bout de la journée__   
       → 
 
 ## 🥸🤓🧐Les axes de réflexion et différentes tâches à faire pour demain
 
-   __réflexion  .__
+   __On gère les authentifications.__
+   
+   → On veut du hash, on veut du argon 2, on veut du JWT !
+   
+   __On finit la gestion des avatars et des images de bouquins__
 
-   __réflexion  .__
 
-   __réflexion  .__
-
+   __Sécuriser le site contre les injections XML__
+   
+   → Liste à compléter pour le reste de la journée
 ---
 
 ### 🤯 Les difficultés rencontrés
 
-
+La fatigue ......
