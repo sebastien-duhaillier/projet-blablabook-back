@@ -11,7 +11,7 @@ export const createUserSchema = Joi.object({
    age: Joi.number().integer().min(0).max(120),
    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net', 'fr'] } }),
    password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")).required(),
-   avatar: Joi.string(), // pour le moment on gère comme ça mais c'est juste pour que nos données passent, à retravailler par la suite !
+   avatar: Joi.string().uri().optional(),
 });
 
 

@@ -16,8 +16,12 @@ Book.init({
       allowNull: true
    },
    cover: {
+
       type: DataTypes.STRING(255),
-      allowNull: false
+      allowNull: false,
+      validate: {
+         len: [0, 255],
+      }
    },
    synopsis: {
       type: DataTypes.STRING(255),
