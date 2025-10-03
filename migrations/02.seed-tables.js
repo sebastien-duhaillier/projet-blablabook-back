@@ -231,11 +231,6 @@ await user6.addBook([book4, book8, book9, book12]);   // Vincent → Paradise Ki
 
 
 
-
-
-
-
-
 console.log("🎉 Seeding terminé avec succès");
 await sequelize.close();
 
