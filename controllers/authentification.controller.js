@@ -114,11 +114,13 @@ import Joi from "joi";
 import jwt from "jsonwebtoken";
 import { User } from "../models/user.model.js";
 import { loginSchema } from "../schemas/login.schema.js";
+import { registerSchema } from "../schemas/register.schema.js";
+
 
 export const userAuthentificationController = {
    async register(req, res) {
       try {
-         const { name, email, password, firstname } = Joi.attempt(req.body, loginSchema);
+         const { name, email, password, firstname } = Joi.attempt(req.body, registerSchema);
 
          const isUserExists = await User.findOne({
             where: { email }
@@ -147,10 +149,10 @@ export const userAuthentificationController = {
 
    async login(req, res) {
       try {
-         const { name, password } = Joi.attempt(req.body, loginSchema);
+         const { email, password } = Joi.attempt(req.body, loginSchema);
 
          const user = await User.findOne({
-            where: { name }
+            where: { email },
          });
 
          if (!user) {
@@ -164,7 +166,7 @@ export const userAuthentificationController = {
          }
 
          const token = jwt.sign(
-            { name: user.name },
+            { email: user.email },
             process.env.JWT_SECRET,
             { expiresIn: "1h" }
          );
@@ -179,8 +181,8 @@ export const userAuthentificationController = {
    async getMe(req, res) {
       try {
          const user = await User.findOne({
-            where: { name: req.user.name },
-            attributes: ["name"]
+            where: { email: req.user.email },
+            attributes: ["name", "email", "firstname"]
          });
 
          if (!user) {
