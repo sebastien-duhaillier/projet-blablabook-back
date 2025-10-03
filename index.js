@@ -33,8 +33,6 @@ app.use(cors());
 // Toutes les routes sont regroupées dans ./routers/index.js
 app.use(apiRouter);
 
-app.use('/uploads', express.static('uploads'));
-
 
 // 🟢 Démarrage du serveur Express
 app.listen(PORT, () => {
