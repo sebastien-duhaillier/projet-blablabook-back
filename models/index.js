@@ -20,19 +20,41 @@ import { sequelize } from "./sequelize.client.js";
 //    as: "books"                       // Alias pour accéder aux livres d’un utilisateur (user.getBooks(), user.addBook())
 // });
 
+// Un livre peut appartenir à plusieurs utilisateurs
 // Un utilisateur peut posséder plusieurs livres
+
+UserBook.belongsTo(User, { 
+   foreignKey: 'user_id', 
+   as: 'user' 
+});
+
+User.hasMany(UserBook, { 
+   foreignKey: 'user_id', 
+   as: 'userBooks' 
+});
+
 User.belongsToMany(Book, {
    through: UserBook,                    // Nom de la table de liaison complexe
    foreignKey: "user_id",                // Clé étrangère dans la table de liaison pointant vers User
    as: "books"                           // Alias pour accéder aux livres d'un utilisateur
 });
 
-// Un livre peut appartenir à plusieurs utilisateurs
 Book.belongsToMany(User, {
    through: UserBook,                    // Nom de la table de liaison complexe
    foreignKey: "book_id",                // Clé étrangère dans la table de liaison pointant vers Book
    as: "users"                           // Alias pour accéder aux utilisateurs possédant le livre
 });
+
+UserBook.belongsTo(Book, {
+   foreignKey: "book_id",
+   as: "book"
+});
+
+Book.hasMany(UserBook, {
+   foreignKey: "book_id",
+   as: "userBooks"
+});
+
 
 // Book.belongsToMany(User, {
 //    through: "user_has_book",
