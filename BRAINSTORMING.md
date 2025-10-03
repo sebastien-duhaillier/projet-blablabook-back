@@ -136,3 +136,8 @@ __🎯 Nous avons fait les routes basiques pour la MVP__
 ### 🤯 Les difficultés rencontrés
 
 La fatigue ......
+
+
+
+
+### Aujourd'hui : AUTHENTIFICATION on attaque par ça !
