@@ -85,10 +85,11 @@ export const bookController = {
             return res.status(404).json({ error: 'Book not found' });
          }
 
-         book.cover = req.file.path;
+         // Générer l'URL complète avec le bon chemin
+         book.cover = `${req.protocol}://${req.get('host')}/uploads/books/images/${req.file.filename}`;
          await book.save();
 
-         res.status(200).json({ message: 'Cover image uploaded successfully' });
+         res.status(200).json({ message: 'Cover image uploaded successfully', cover_url: book.cover });
       } catch (error) {
          console.error(error);
          res.status(500).json({ error: 'Internal server error' });

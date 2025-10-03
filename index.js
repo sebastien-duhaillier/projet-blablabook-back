@@ -30,11 +30,13 @@ app.use(cors());
 app.use(xss());
 
 
+// � Middleware pour servir les fichiers statiques (doit être avant les routes API)
+app.use('/uploads', express.static('uploads'));
+
+// �🛣️ Intégration du routeur principal de l'API
 //  Intégration du routeur principal de l'API
 // Toutes les routes sont regroupées dans ./routers/index.js
 app.use(apiRouter);
-
-app.use('/uploads', express.static('uploads'));
 
 
 //  Démarrage du serveur Express
