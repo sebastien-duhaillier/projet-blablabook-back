@@ -3,14 +3,7 @@ import { bookController } from '../controllers/index.js';
 import upload from "../middlewares/uploadCover.middleware.js";
 
 
-
-
-
 export const bookRouter = Router();
-
-
-
-
 
 
 bookRouter.get('/home', bookController.getRandomBooks);       // sur la page d'accueil limit: 10 pour le caroussel

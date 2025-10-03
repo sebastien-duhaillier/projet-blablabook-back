@@ -21,7 +21,10 @@ userRouter.get('/user/:id', userController.getUserById);
 
 
 // Routes pour ajouter ou supprimer un livre à la bibliothèque d’un utilisateur
-userRouter.delete('/user/:userId/book/:bookId', userController.deleteBookFromUser);
-userRouter.post('/user/:userId/book/:bookId', userController.addBookToUser);
+// userRouter.delete('/user/:userId/book/:bookId', userController.deleteBookFromUser);
+// userRouter.post('/user/:userId/book/:bookId', userController.addBookToUser);
+// userRouter.get('/user/:userId/books', userController.userBooks);
+
+
 userRouter.post('/user/:userId/avatar', upload.single('avatar'), userController.userAvatar);
 
