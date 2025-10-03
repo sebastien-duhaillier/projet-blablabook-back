@@ -32,7 +32,7 @@ const book16 = await Book.create({ title: "La Servante Écarlate", release_date:
 const book17 = await Book.create({ title: "Druss la Légende", release_date: "1993-06-01", cover: "https://m.media-amazon.com/images/I/81+mMDfliBL._SL1500_.jpg", synopsis: "Une épopée fantasy sur un guerrier mythique, entre honneur, combat et solitude." });
 const book18 = await Book.create({ title: "Endymion", release_date: "1996-02-01", cover: "https://m.media-amazon.com/images/I/61OvhEOqvnL._SL1139_.jpg", synopsis: "Une aventure de science-fiction dans l’univers d’Hyperion, entre poésie et technologie." });
 const book19 = await Book.create({ title: "Le Seigneur des Anneaux", release_date: "1954-07-29", cover: "https://m.media-amazon.com/images/I/91Eh5NIns6L._SL1500_.jpg", synopsis: "La quête épique de l’Anneau unique dans un monde fantastique peuplé de héros et de ténèbres." });
-const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "1932-01-01", cover: "conan.jpg", synopsis: "Les aventures brutales et mythiques du barbare Conan dans un monde sauvage et magique." });
+const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "1932-01-01", cover: "http://localhost:3000/uploads/books/images/conan.jpg" , synopsis: "Les aventures brutales et mythiques du barbare Conan dans un monde sauvage et magique." });
 
 // Les auteurs 
 
