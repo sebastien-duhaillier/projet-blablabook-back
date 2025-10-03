@@ -6,7 +6,12 @@ export class UserBook extends Model { }
 
 
 UserBook.init({
-   toRead: {
+    id: {
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
+    },
+    toRead: {
       type: DataTypes.BOOLEAN,
       allowNull: false
    }

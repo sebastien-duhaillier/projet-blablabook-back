@@ -77,7 +77,7 @@ const author5 = await Author.create({
 });
 
 const author6 = await Author.create({
-   name: "Aiyazawa",
+   name: "Yazawa",
    firstname: "Ai",
    bio: "Ai Yazawa est une mangaka japonaise renommée pour ses œuvres 'NANA' et 'Paradise Kiss'. Elle explore les thèmes de la mode, de l’amour et de l’indépendance avec un style graphique distinctif et émotionnel."
 });
