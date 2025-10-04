@@ -25,3 +25,19 @@ userRouter.delete('/user/:userId/book/:bookId', userController.deleteBookFromUse
 userRouter.post('/user/:userId/book/:bookId', userController.addBookToUser);
 userRouter.post('/user/:userId/avatar', upload.single('avatar'), userController.userAvatar);
 
+
+
+
+// userRouter.post('/user/register', avatarUpload.single('avatar'), userAuthentificationController.register); // création d'un compte
+
+// userRouter.post('/user/register', userAuthentificationController.register); // création d'un compte
+
+// userRouter.post('/user/login', userAuthentificationController.login); // login du user avec la gestion du token
+
+// userRouter.get('/auth/me', authenticate, userAuthentificationController.getMe);
+
+// est ce que ces routes n'ont pas plutôt leur place dans un /auth/register etc .....
+
+// /me
+// /me/books
+// /me/books/:id
