@@ -1,143 +1,114 @@
-# Brainstorming (ou tout simplement "NOTES"... 😉😉 "clin d'oeil, clin d'oeil")
+# Carnet de notes / Brainstorming / KoiKonFait ? 😉😉 "clin d'œil, clin d'œil"
 
-## 30/09/2025
+## ⭕ Sprint 0
 
-__🎯 Initialisation de la BDD__
+### 23/09/2025
+Aujourd’hui, nous avons rédigé la présentation générale du projet, comportant la définition des besoins fonctionnels (MVP) ainsi que les objectifs du projet et ses évolutions potentielles.  
+Nous avons défini les contraintes techniques du projet, sa cible et la liste des navigateurs compatibles.  
+Nous avons réalisé l’arborescence du site ainsi que ses routes et rédigé les user stories.
 
-   → Création et mise en place de la BDD,
+### 24/09/2025
+Élaboration des modèles MCD et MLD du projet, ainsi que du dictionnaire des données.  
+Développement des user stories et description des choix technologiques.  
+Début de la charte graphique (palette de couleurs, polices).  
+Conception des wireframes (page d’accueil en mobile first).
 
-   → Et tables de liaison OK,
+### 25/09/2025
+Poursuite des wireframes en détail (connexion, inscription, bibliothèque perso, recherche, catalogue, détails livre, mon compte, mentions légales) en mobile et desktop.  
+Préparation de la charte graphique.
 
-   → Mise en place des migrations et test dbb réussi
- 
-
-## 🥸🤓🧐Les axes de réflexion et différentes tâches à faire pour demain
-
- __Voir avec la team Front , il veulent peut-être des books bien précis__
-
-   → Suite à cette réflexion, nous avons décidé de mettre des livres que nous apprécions, individuellement, dans notre BDD.
-
-__isbn ou id pour definir les clées primaires__
-
-   → On sait que Sequelize nous gère automatiquement les id, et pour la taille de notre projet, nous avons finalement décidé de ne pas renseigner les id ou isbn.
-
-__plus de rôle admin pour l'instant que le rôle user__
-
-   → Nous avons retrouvé dans nos précédents projets, une manière de gérer les rôles. Par défaut, le rôle sera simple "user". 
-
- __On a rajouté un prénom pour la table des auteurs__
-
-   → Effectivement, cela parraît tout à fait naturel mais cela nous a échappé durant notre réflexion pendant la première semaine (peut-être encore d'autres surprise......😉)
-
-
-__on peut gérer l'apport des images seulement en renseignant l'url d'une image de chaque bouquin__
-
-   → Par contre, pour être "large" au niveau du nombre de caractères, on renseignera STRING(255) pour le champ "cover", les URL peuvent être assez longue !
-   Si nous passons par des url directement, cela nous enlêve de la gestion de upload du côté back
-   et du côté front on pourra faire appel aux images → {book.cover}
-   ex:
-   ```svelte
-   <img src="{book.cover}" alt="{book.title}" class="book-cover" /> 
-   ```
-   idée de gestion au niveau du css... pour remettre le 👃"nez dedans":
-   ```css
-   .book-cover {
-  width: 100%;
-  max-width: 300px;
-  object-fit: cover;
-  border-radius: 8px;
-}
-   ```
-## 01/10/2025
-
-__🎯 Effectivement nous avons réussi à gérer l'apport des images dans la BDD__
-
-   → Changement fait au niveau du "cover"
-
-__🎯 Nous avons fait les routes basiques pour la MVP__
-
-   → Les routers et les controllers liés entre eux avec les "imports" pour les users, authors et genres, les tables de liaison ont été gérées (allez....presque toutes)
-
-
-
-## 🥸🤓🧐Les axes de réflexion et différentes tâches à faire pour demain
-
-   __❎Traîter les "Pull requests".__
-
-   __Rôles à définir , se réferer à ce qui a été fait dans okanban .__ v2
-
-   __❎En fin de journée, nous nous sommes rendu compte que nous n'avions pas inclus de biographie pour les auteurs, donc à corriger.__
-
-   __❎Nous devons mettre en place les routes de suppression et ajout d'un livre dans les bibliothèques de chaque "user".__
-
-   __La gestion de l’upload d’images pour l’avatar de chaque  “user“ doit être finie le 02/10 .__ 
-   
-   __Renommage de la route book/home__ 
-
-   __Les routes d'authentification  :__ 
-
-   * POST /signup, pour la création d'un compte,
-
-   * POST /login, pour la connexion avec la gestion d'un token (JWT),
-
-   * Sécuriser les routes avec des middlewares d'authentification,
-
-   * PUT /user/avatar pour l'upload, la mise à jour d'un avatar 
-   
-   * PUT /user/:id/book/:id
-
-   * PUT /user/:id/book/:id
-
-   * JWT à mettre en place aujour'd'hui
-
-   * Faire des tests de connexion front et back
-
-   * mettre en place des tests unitaires 
-
-   * Documentation
-
-   * _Créer DELETE /user, pour la suppression d'un compte (<u>à voir si à faire de suite ou au moment du dernier sprint</u>)_ ,v2
-   
-### 🤯 Les difficultés rencontrés
-
-   → Notre test de création de user a été long et éprouvant.... jusqu'à ce qu'on se rende compte que le positionnement des middlewares dans notre point d'entrer du site
-
-   → Prise en main de Postman légèrement compliquée au début (peut-être avec la fatigue aussi 😉) 
+### 26/09/2025
+Réalisation des maquettes du site Blablabook (mobile et desktop).  
+Finalisation de la charte graphique.  
+Définition des routes de l’API côté back.  
+Attribution des rôles dans l’équipe.  
+Organisation du Trello pour démarrer le sprint 1.
 
 ---
+
+## 🚀 Sprint 1
+
+### 29/09/2025
+- Initialisation front et back / problème de versions SvelteKit  
+- Création des branches  
+- Début dev front : prise en main SvelteKit, tests des premières pages  
+- Début dev back : architecture API REST, import des modules, mise en place du serveur  
+- Installation de l’extension Git Graph dans VSCode
+
+### 30/09/2025  
+- Front : problème de suppression de branche Git “initialization SvelteKit”  
+- Création des composants header et footer  
+- Création des pages d’accueil, booklist et catalogue  
+
+Back :  
+- 🎯 Initialisation de la BDD  
+- Création et mise en place des tables et des tables de liaison  
+- Mise en place des migrations et test dbb réussi  
+- Réflexion sur les clés primaires : Sequelize gère les `id`, pas d’usage d’ISBN  
+- Ajout du champ `cover` (STRING(255)) pour les URL d’images de livres  
+- Pas de gestion d’upload côté back pour les couvertures, appel direct via `{book.cover}` côté front  
+- Ajout du prénom dans la table des auteurs 😉  
+- Rôle par défaut : "user", pas d’admin pour l’instant  
+- Décision d’ajouter des livres appréciés individuellement dans la BDD
+
+### 01/10/2025  
+- 🎯 Import des couvertures dans la BDD  
+- 🎯 Routes basiques de l’API faites (users, authors, genres, liaisons)  
+- Réorganisation de `index.js` avec les middlewares JSON  
+- Création du schéma `user`  
+
+🥸🤓🧐 Tâches à faire :  
+- ❎ Traiter les Pull Requests  
+- ❎ Ajouter les biographies des auteurs  
+- ❎ Routes de suppression/ajout de livres dans les bibliothèques des users  
+- ❎ Finaliser l’upload des avatars  
+- ❎ Renommer la route `book/home` → `book/random` par exemple  
+- ❎ Tests de connexion front/back  
+- ❎ Authentification :  
+  - POST /register  
+  - POST /login  
+  - Middleware JWT  
+  - PUT /user/avatar  
+  - PUT /user/:id/book/:id  
+  - DELETE /user (à voir pour v2)  
+
+
+🤯 Difficultés :  
+- Test de création de user compliqué → problème de positionnement des middlewares  
+- Prise en main de Postman laborieuse (peut-être avec la fatigue aussi 😉)
+
+### 02/10/2025  
+- 🎯 Import de Multer pour les uploads (couvertures + avatars)  
+- 🎯 Changement du type de champ `cover` dans la BDD  
+- 🎯 Connexion front/back enfin fonctionnelle malgré les caprices de SvelteKit  
+
+🥸🤓🧐 Tâches à faire :  
+- ❎ Gestion des authentifications : Argon2 + JWT  
+- ❎ Sécuriser contre les injections XML  
+-  Finaliser les avatars et les images de bouquins  
+-  Compléter la liste des routes et des tests
+
+🤯 Difficultés :  
+- La fatigue ......
+
+### 03/10/2025  
+- Front : poursuite des liens entre front et back pour affichage des livres et navigation  
+- Back : mise en place du JWT, hachage des mots de passe  
+- Groupe : connexion utilisateur → redirection vers la page “mon compte”
+
+🥸🤓🧐 Tâches à faire :  
+- Finaliser les tests d’authentification  
+- Vérifier la sécurité des routes  
+- Ajouter les validations côté back  
+- Préparer les tests unitaires  
+- Compléter la documentation technique  
+- Vérifier la cohérence des schémas Sequelize  
+- Préparer les routes pour la V2 (suppression de compte, gestion avancée des rôles)
+
 ---
 
-## 02/10/2025
+## 📌 À ne pas oublier
 
-   __🎯 Import de multer pour la gestion des imports de photos de couverture et avatar des user__   
-      
-      → Encore à travailler du côté des avatars
-
-   __🎯 Jonction Front et Back bien démarrée__   
-      → On réussi à afficher des images et des données de la BDD
-       
-   __🎯 On réussi à aller au bout de la journée__   
-      → 
-
-## 🥸🤓🧐Les axes de réflexion et différentes tâches à faire pour demain
-
-   __On gère les authentifications.__
-   
-   → On veut du hash, on veut du argon 2, on veut du JWT !
-   
-   __On finit la gestion des avatars et des images de bouquins__
-
-
-   __Sécuriser le site contre les injections XML__
-   
-   → Liste à compléter pour le reste de la journée
----
-
-### 🤯 Les difficultés rencontrés
-
-La fatigue ......
-
-
-
-
-### Aujourd'hui : AUTHENTIFICATION on attaque par ça !
+```js
+bookRouter.get('/home', bookController.getRandomBooks);
+// cette route est à renommer, je le (re)note en gros ici pour ne pas oublier ^^

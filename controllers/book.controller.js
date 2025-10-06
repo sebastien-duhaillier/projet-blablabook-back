@@ -27,14 +27,30 @@ export const bookController = {
 
 
    async getAllBooks(req, res) {
+      const page = parseInt(req.query.page, 10) || 1;
+      const limit = parseInt(req.query.limit, 10) || 10;
+      const offset = (page - 1) * limit;
+
       try {
          const books = await Book.findAll({
             include: [
                { model: Author, as: "authors", through: { attributes: [] } },
                { model: Genre, as: "genres", through: { attributes: [] } },
-            ]
+            ],
+            order: [['release_date', 'DESC']],
+            limit,
+            offset
          });
-         res.json(books);
+
+         const totalBooks = await Book.count();
+         const totalPages = Math.ceil(totalBooks / limit);
+
+         res.json({
+            page,
+            totalPages,
+            totalBooks,
+            books
+         });
       } catch (error) {
          res.status(500).json({ error: 'Erreur lors de la récupération des livres' });
       }

@@ -8,4 +8,4 @@ export const registerSchema = Joi.object({
    password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9!@#$%^&*()_+\\-=[\\]{}|;:'\",.<>?/]{8,30}$")).required(),
    avatar: Joi.string().allow('').optional(),
    age: Joi.number().integer().min(0).max(120).optional()
-});
+})
