@@ -41,9 +41,32 @@ export const userbookController = {
             res.status(500).json({ error: 'Erreur lors de la récupération de la booklist' });
         }
 
+    },
+
+// récupérer les livres de la booklist user //
+async getFavorites (req, res) {
+    try {
+      const user = await User.findOne({
+        where: { email: req.user.email }, // on récupère les infos user via le token front qui renvoie req.user //
+        include: [
+          {
+            model: Book,
+            as: "books",
+            through: { attributes: [] }
+          }
+        ]
+      });
+
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      res.status(200).json(user.books);
+    } catch (error) {
+      console.error("Erreur getFavoris :", error);
+      res.status(500).json({ error: "Erreur serveur" });
     }
-
-
+  }
 
    //  notre méthode ici permet d'ajouter un livre à la booklist
    // async addBookToUser(req, res) {

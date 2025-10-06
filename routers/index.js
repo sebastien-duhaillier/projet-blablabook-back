@@ -7,7 +7,7 @@ import { userbookRouter } from "./userbook.router.js";
 
 export const apiRouter = Router();
 
-apiRouter.get("/", (req, res) => {
+/* apiRouter.get("/", (req, res) => {
    res.json({
       message: "Welcome to the BlaBlaBook API",
       description:
@@ -21,7 +21,7 @@ apiRouter.get("/", (req, res) => {
       },
    });
 });
-
+ */
 
 apiRouter.use(bookRouter); // page d'accueil avec les 10 livres aléatoires
 apiRouter.use(authorRouter);
