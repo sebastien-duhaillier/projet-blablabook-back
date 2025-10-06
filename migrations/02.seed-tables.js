@@ -1,4 +1,4 @@
-import { Genre, Book, Author, User, sequelize } from "../models/index.js";
+import { Genre, Book, Author, User, UserBook, sequelize } from "../models/index.js";
 
 console.log("🌱 Seeding des tables...");
 
@@ -34,6 +34,16 @@ const book18 = await Book.create({ title: "Endymion", release_date: "1996-02-01"
 const book19 = await Book.create({ title: "Le Seigneur des Anneaux", release_date: "1954-07-29", cover: "https://m.media-amazon.com/images/I/91Eh5NIns6L._SL1500_.jpg", synopsis: "La quête épique de l’Anneau unique dans un monde fantastique peuplé de héros et de ténèbres." });
 const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "1932-01-01", cover: "http://localhost:3000/uploads/books/images/conan.jpg" , synopsis: "Les aventures brutales et mythiques du barbare Conan dans un monde sauvage et magique." });
 
+
+// Les userbooks
+
+const userbook1 = await UserBook.create({ user_id: user2.id, book_id: book20.id, toRead: true });
+const userbook2 = await UserBook.create({ user_id: user3.id, book_id: book2.id, toRead: false });
+const userbook3 = await UserBook.create({ user_id: user4.id, book_id: book5.id, toRead: false });
+const userbook4 = await UserBook.create({ user_id: user5.id, book_id: book9.id, toRead: true  });
+const userbook5 = await UserBook.create({ user_id: user6.id, book_id: book18.id, toRead: false });
+
+
 // Les auteurs 
 
 const author1 = await Author.create({
@@ -67,7 +77,7 @@ const author5 = await Author.create({
 });
 
 const author6 = await Author.create({
-   name: "Aiyazawa",
+   name: "Yazawa",
    firstname: "Ai",
    bio: "Ai Yazawa est une mangaka japonaise renommée pour ses œuvres 'NANA' et 'Paradise Kiss'. Elle explore les thèmes de la mode, de l’amour et de l’indépendance avec un style graphique distinctif et émotionnel."
 });
@@ -222,12 +232,12 @@ await book20.addGenre(genre19); // Conan → Sword & Sorcery
 
 // Voici notre table de liaison concernant user → book
 
-await user1.addBook([book]);             // ✅ alias = "books"
-await user2.addBook([book17, book18, book19, book20]);   // Sébastien → Orgueil et Préjugés
-await user3.addBook([book3, book2, book7, book11, book15, book16]);   // Ludivine → Wild
-await user4.addBook([book5, book6, book10, book13, book14]);   // Claude → Veille sur elle
-await user5.addBook([book10, book17, book19]);   // Bastien → Rendez-vous avec le crime
-await user6.addBook([book4, book8, book9, book12]);   // Vincent → Paradise Kiss
+// await user1.addBook([book]);             // ✅ alias = "books"
+// await user2.addBook([book17, book18, book19, book20]);   // Sébastien → Orgueil et Préjugés
+// await user3.addBook([book3, book2, book7, book11, book15, book16]);   // Ludivine → Wild
+// await user4.addBook([book5, book6, book10, book13, book14]);   // Claude → Veille sur elle
+// await user5.addBook([book10, book17, book19]);   // Bastien → Rendez-vous avec le crime
+// await user6.addBook([book4, book8, book9, book12]);   // Vincent → Paradise Kiss
 
 
 

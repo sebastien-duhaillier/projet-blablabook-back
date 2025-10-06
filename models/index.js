@@ -1,6 +1,7 @@
 // Importation des modèles Sequelize
 import { User } from "./user.model.js";
 import { Book } from "./book.model.js";
+import { UserBook } from "./userBook.model.js";
 import { Genre } from "./genre.model.js";
 import { Author } from "./author.model.js";
 import { sequelize } from "./sequelize.client.js";
@@ -12,19 +13,55 @@ import { sequelize } from "./sequelize.client.js";
 
 // 📚 Un utilisateur peut avoir plusieurs livres (empruntés, achetés, lus, etc.)
 // Et un livre peut appartenir à plusieurs utilisateurs
+// User.belongsToMany(Book, {
+//    through: "user_has_book",         // Nom de la table de liaison personnalisée
+//    foreignKey: "user_id",            // Clé étrangère dans la table de liaison pointant vers User
+//    otherKey: "book_id",              // Clé étrangère dans la table de liaison pointant vers Book
+//    as: "books"                       // Alias pour accéder aux livres d’un utilisateur (user.getBooks(), user.addBook())
+// });
+
+// Un livre peut appartenir à plusieurs utilisateurs
+// Un utilisateur peut posséder plusieurs livres
+
+UserBook.belongsTo(User, { 
+   foreignKey: 'user_id', 
+   as: 'user' 
+});
+
+User.hasMany(UserBook, { 
+   foreignKey: 'user_id', 
+   as: 'userBooks' 
+});
+
 User.belongsToMany(Book, {
-   through: "user_has_book",         // Nom de la table de liaison personnalisée
-   foreignKey: "user_id",            // Clé étrangère dans la table de liaison pointant vers User
-   otherKey: "book_id",              // Clé étrangère dans la table de liaison pointant vers Book
-   as: "books"                       // Alias pour accéder aux livres d’un utilisateur (user.getBooks(), user.addBook())
+   through: UserBook,                    // Nom de la table de liaison complexe
+   foreignKey: "user_id",                // Clé étrangère dans la table de liaison pointant vers User
+   as: "books"                           // Alias pour accéder aux livres d'un utilisateur
 });
 
 Book.belongsToMany(User, {
-   through: "user_has_book",
-   foreignKey: "book_id",
-   otherKey: "user_id",
-   as: "users"                       // Alias pour accéder aux utilisateurs d’un livre (book.getUsers(), book.addUser())
+   through: UserBook,                    // Nom de la table de liaison complexe
+   foreignKey: "book_id",                // Clé étrangère dans la table de liaison pointant vers Book
+   as: "users"                           // Alias pour accéder aux utilisateurs possédant le livre
 });
+
+UserBook.belongsTo(Book, {
+   foreignKey: "book_id",
+   as: "book"
+});
+
+Book.hasMany(UserBook, {
+   foreignKey: "book_id",
+   as: "userBooks"
+});
+
+
+// Book.belongsToMany(User, {
+//    through: "user_has_book",
+//    foreignKey: "book_id",
+//    otherKey: "user_id",
+//    as: "users"                       // Alias pour accéder aux utilisateurs d’un livre (book.getUsers(), book.addUser())
+// });
 
 // 🎭 Un genre peut regrouper plusieurs livres
 // Et un livre peut appartenir à plusieurs genres
@@ -59,4 +96,4 @@ Book.belongsToMany(Author, {
 });
 
 // Exportation des modèles pour les utiliser ailleurs dans le projet
-export { User, Book, Author, Genre, sequelize };
+export { User, Book, Author, Genre, UserBook, sequelize };

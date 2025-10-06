@@ -3,9 +3,6 @@ import { Sequelize } from 'sequelize';
 import Joi from "joi";
 
 
-
-
-
 export const bookController = {
 
 
