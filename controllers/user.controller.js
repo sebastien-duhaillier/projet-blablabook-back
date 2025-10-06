@@ -1,8 +1,6 @@
 import { Book, Author, Genre, User } from '../models/index.js';
-import { Sequelize } from 'sequelize';
 import Joi from "joi";
 import { createUserSchema } from '../schemas/user.schema.js';
-import { Result } from 'pg';
 
 
 
