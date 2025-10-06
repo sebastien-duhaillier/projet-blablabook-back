@@ -11,7 +11,6 @@ const user5 = await User.create({ name: "Lemoine", firstname: "Bastien", age: 27
 const user6 = await User.create({ name: "Dupuis", firstname: "Vincent", age: 34, role: "user", email: "vincent.dupuis@example.com", password: "passVincent654", avatar: "🧠" });
 
 
-
 // notre premier livre
 const book = await Book.create({ title: 'Le Mystère de la Vallée', release_date: '2022-05-15', cover: 'mystere-vallee.jpg', synopsis: 'Un thriller captivant dans une vallée isolée.', });
 const book2 = await Book.create({ title: "Orgueil et Préjugés", release_date: "1813-01-28", cover: "http://localhost:3000/uploads/books/images/orgueil-et-prejuges.jpg", synopsis: "Une romance classique sur les mœurs et les préjugés dans l’Angleterre du XIXe siècle." });
@@ -37,9 +36,24 @@ const book20 = await Book.create({ title: "Conan le cimmérien", release_date: "
 
 // Les userbooks
 
-const userbook1 = await UserBook.create({ user_id: user2.id, book_id: book20.id, toRead: true });
-const userbook2 = await UserBook.create({ user_id: user3.id, book_id: book2.id, toRead: false });
-const userbook3 = await UserBook.create({ user_id: user4.id, book_id: book5.id, toRead: false });
+const userbook1 = await UserBook.bulkCreate([
+   { user_id: user2.id, book_id: book20.id, toRead: true }, 
+   { user_id: user2.id, book_id: book17.id, toRead: false }, 
+   { user_id: user2.id, book_id: book9.id, toRead: true }
+]);
+const userbook2 = await UserBook.bulkCreate([
+   { user_id: user3.id, book_id: book2.id, toRead: false },
+   { user_id: user3.id, book_id: book7.id, toRead: false },
+   { user_id: user3.id, book_id: book15.id, toRead: false },
+   { user_id: user3.id, book_id: book16.id, toRead: false }
+]);
+const userbook3 = await UserBook.bulkCreate([
+   { user_id: user4.id, book_id: book5.id, toRead: false },
+   { user_id: user4.id, book_id: book6.id, toRead: false },
+   { user_id: user4.id, book_id: book10.id, toRead: false },
+   { user_id: user4.id, book_id: book13.id, toRead: false },
+   { user_id: user4.id, book_id: book14.id, toRead: true }
+]);
 const userbook4 = await UserBook.create({ user_id: user5.id, book_id: book9.id, toRead: true  });
 const userbook5 = await UserBook.create({ user_id: user6.id, book_id: book18.id, toRead: false });
 
@@ -228,17 +242,6 @@ await book17.addGenre(genre16); // Druss la légende → Fantasy
 await book18.addGenre(genre17); // Endymion → Science-fiction
 await book19.addGenre(genre18); // Seigneur des Anneaux → High Fantasy
 await book20.addGenre(genre19); // Conan → Sword & Sorcery
-
-
-// Voici notre table de liaison concernant user → book
-
-// await user1.addBook([book]);             // ✅ alias = "books"
-// await user2.addBook([book17, book18, book19, book20]);   // Sébastien → Orgueil et Préjugés
-// await user3.addBook([book3, book2, book7, book11, book15, book16]);   // Ludivine → Wild
-// await user4.addBook([book5, book6, book10, book13, book14]);   // Claude → Veille sur elle
-// await user5.addBook([book10, book17, book19]);   // Bastien → Rendez-vous avec le crime
-// await user6.addBook([book4, book8, book9, book12]);   // Vincent → Paradise Kiss
-
 
 
 console.log("🎉 Seeding terminé avec succès");
