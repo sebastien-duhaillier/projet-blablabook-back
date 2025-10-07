@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { userController } from "../controllers/index.js";
+import { userbookController } from "../controllers/userbook.controller.js";
 import { userAuthentificationController } from "../controllers/index.js";
 import avatarUpload from "../middlewares/uploadAvatar.middleware.js";
 import upload from "../middlewares/uploadCover.middleware.js";
@@ -11,7 +12,14 @@ userRouter.post('/user/register', userAuthentificationController.register); // c
 
 userRouter.post('/user/login', userAuthentificationController.login); // login du user avec la gestion du token
 
-userRouter.get('/auth/me', authenticate, userAuthentificationController.getMe);
+/* userRouter.get('/auth/me', authenticate, userAuthentificationController.getMe);
+ */
+userRouter.get('/user/me', authenticate, userAuthentificationController.getMe);
+
+//afficher booklist//
+userRouter.get("/favorites", authenticate, userbookController.getFavorites);
+
+
 
 userRouter.post('/user', userController.createUser);
 
