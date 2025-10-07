@@ -12,12 +12,10 @@ userRouter.post('/user/register', userAuthentificationController.register); // c
 
 userRouter.post('/user/login', userAuthentificationController.login); // login du user avec la gestion du token
 
-/* userRouter.get('/auth/me', authenticate, userAuthentificationController.getMe);
- */
-userRouter.get('/user/me', authenticate, userAuthentificationController.getMe);
+userRouter.get('/auth/me', authenticate, userAuthentificationController.getMe);
 
 //afficher booklist//
-userRouter.get("/favorites", authenticate, userbookController.getFavorites);
+// userRouter.get("/favorites", authenticate, userbookController.getFavorites);
 
 
 
