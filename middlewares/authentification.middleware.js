@@ -1,70 +1,27 @@
-// import jwt from "jsonwebtoken"; // JSON Web Token pour générer ... un token
-
-// // import { User } from "../models/user.model.js"; // import du model
-
-
-
-// export function authenticate(req, res, next) {
-//    //       1 - On va vérifier que notre utilisateur a un token
-//    const authHeader = req.headers.authorization;
-
-//    // Si           nous n'avons pas l'entete 'Authorization'
-//    // Ou si la valeur ne débute pas par 'Bearer'
-//    if (!authHeader || !authHeader.startsWith("Bearer")) {
-//       return res.status(403).json({
-//          error: "You can't have access to this resource, please authentify",
-//       });
-//    }
-
-//    const token = authHeader.split(" ")[1];
-
-//    // Je récupère :
-//    // 1 - le token (évidemment LOL)
-//    // 2 - Le secret stocké dans notre .env
-//    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-//    // Si le token est expiré ou invalide
-//    if (!decoded) {
-//       return res.status(403).json({
-//          error: "Your token is invalid or has been expired",
-//       });
-//    }
-
-//    // Maintenant qu'on a un token vérifié
-//    req.user = decoded;
-
-//    // On n'oublie pas de laisser passer à la suite
-//    next();
-//    console.error("JWT error:", err.message);
-
-// }
-
-
-
 import jwt from "jsonwebtoken";
 
 export function authenticate(req, res, next) {
-   const authHeader = req.headers.authorization;
+  const authHeader = req.headers.authorization;
 
-   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return res.status(403).json({
-         error: "You can't have access to this resource, please authentify",
-      });
-   }
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(403).json({
+      error: "You can't have access to this resource, please authentify",
+    });
+  }
 
-   const token = authHeader.split(" ")[1];
+  const token = authHeader.split(" ")[1];
 
-   try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-      req.user = decoded;
-      next();
-   } catch (err) {
-      console.error("JWT error:", err.message);
-      return res.status(403).json({
-         error: "Your token is invalid or has expired",
-      });
-   }
+    req.user = decoded;
+    next();
+  } catch (err) {
+    console.error("JWT error:", err.message);
+    return res.status(403).json({
+      error: "Your token is invalid or has expired",
+    });
+  }
 }
 
 
