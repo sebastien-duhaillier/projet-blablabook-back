@@ -5,6 +5,7 @@ import upload from "../middlewares/uploadCover.middleware.js";
 
 export const bookRouter = Router();
 
+bookRouter.get('/search', bookController.searchBooks);
 
 bookRouter.get('/', bookController.getRandomBooks);
 bookRouter.get('/catalog', bookController.getAllBooks);

@@ -1,5 +1,6 @@
 import { Book, Author, Genre } from '../models/index.js';
 import { Sequelize } from 'sequelize';
+import { Op } from 'sequelize';
 
 
 export const bookController = {
@@ -89,5 +90,54 @@ export const bookController = {
 
     }
 
-  }
+  },
+
+  async searchBooks(req, res) {
+    try {
+      const { q, sortBy = 'title', page = 1, limit = 20 } = req.query;
+      const offset = (page - 1) * limit;
+
+      if (!q) return res.json([]);
+
+      // Construire le where pour title, auteur ou genre
+      const books = await Book.findAll({
+        where: {
+          title: { [Op.iLike]: `%${q}%` }
+        },
+        include: [
+          {
+            model: Author,
+            as: 'authors',
+            through: { attributes: [] },
+            where: { name: { [Op.iLike]: `%${q}%` } },
+            required: false
+          },
+          {
+            model: Genre,
+            as: 'genres',
+            through: { attributes: [] },
+            where: { name: { [Op.iLike]: `%${q}%` } },
+            required: false
+          }
+        ],
+        order: [[sortBy, 'ASC']],
+        limit: parseInt(limit, 10),
+        offset: parseInt(offset, 10)
+      });
+
+      const totalBooks = await Book.count({
+        where: {
+          title: { [Op.iLike]: `%${q}%` }
+        }
+      });
+
+      const totalPages = Math.ceil(totalBooks / limit);
+
+      res.json({ page: parseInt(page), totalPages, totalBooks, books });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Erreur lors de la recherche de livres' });
+    }
+  },
+
 }
