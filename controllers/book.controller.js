@@ -91,53 +91,149 @@ export const bookController = {
     }
 
   },
+async searchBooks(req, res) {
+  try {
+    const { q, sortBy = 'title', page = 1, limit = 20 } = req.query;
+    const offset = (page - 1) * limit;
 
-  async searchBooks(req, res) {
-    try {
-      const { q, sortBy = 'title', page = 1, limit = 20 } = req.query;
-      const offset = (page - 1) * limit;
+    if (!q || q.trim().length < 2) {
+      return res.json({ books: [] });
+    }
 
-      if (!q) return res.json([]);
+    const searchTerm = q.trim();
+
+    // Recherche séparée pour chaque type
+    const booksByTitle = await Book.findAll({
+      where: {
+        title: { [Op.iLike]: `%${searchTerm}%` }
+      },
+      include: [
+        { model: Author, as: 'authors', through: { attributes: [] } },
+        { model: Genre, as: 'genres', through: { attributes: [] } }
+      ]
+    });
+
+    const booksByAuthor = await Book.findAll({
+      include: [
+        {
+          model: Author,
+          as: 'authors',
+          through: { attributes: [] },
+          where: {
+            [Op.or]: [
+              { name: { [Op.iLike]: `%${searchTerm}%` } },
+              { firstname: { [Op.iLike]: `%${searchTerm}%` } }
+            ]
+          }
+        },
+        { model: Genre, as: 'genres', through: { attributes: [] } }
+      ]
+    });
+
+    const booksByGenre = await Book.findAll({
+      include: [
+        { model: Author, as: 'authors', through: { attributes: [] } },
+        {
+          model: Genre,
+          as: 'genres',
+          through: { attributes: [] },
+          where: {
+            name: { [Op.iLike]: `%${searchTerm}%` }
+          }
+        }
+      ]
+    });
+
+    // Fusionner les résultats et supprimer les doublons
+    const allBooks = [...booksByTitle, ...booksByAuthor, ...booksByGenre];
+    const uniqueBooks = allBooks.filter((book, index, self) => 
+      index === self.findIndex(b => b.id === book.id)
+    );
+
+    // Pagination
+    const paginatedBooks = uniqueBooks.slice(offset, offset + parseInt(limit));
+    const totalBooks = uniqueBooks.length;
+    const totalPages = Math.ceil(totalBooks / limit);
+
+    console.log(`Recherche "${searchTerm}": ${uniqueBooks.length} livres trouvés`);
+
+    res.json({ 
+      page: parseInt(page), 
+      totalPages, 
+      totalBooks, 
+      books: paginatedBooks 
+    });
+  } catch (error) {
+    console.error('Erreur searchBooks:', error);
+    res.status(500).json({ error: 'Erreur lors de la recherche de livres' });
+  }
+},  
+
+  //async searchBooks(req, res) {
+   // try {
+//const { q, sortBy = 'title', page = 1, limit = 20 } = req.query;
+   //   const offset = (page - 1) * limit;
+
+   //   if (!q) return res.json([]);
 
       // Construire le where pour title, auteur ou genre
-      const books = await Book.findAll({
-        where: {
-          title: { [Op.iLike]: `%${q}%` }
-        },
-        include: [
-          {
-            model: Author,
-            as: 'authors',
-            through: { attributes: [] },
-            where: { name: { [Op.iLike]: `%${q}%` } },
-            required: false
-          },
-          {
-            model: Genre,
-            as: 'genres',
-            through: { attributes: [] },
-            where: { name: { [Op.iLike]: `%${q}%` } },
-            required: false
-          }
-        ],
-        order: [[sortBy, 'ASC']],
-        limit: parseInt(limit, 10),
-        offset: parseInt(offset, 10)
-      });
+    //  const books = await Book.findAll({
+    //    where: {
+    //      title: { [Op.iLike]: `%${q}%` }
+//},
+//include: [
+     //     {
+     //       model: Author,
+     //       as: 'authors',
+     //       through: { attributes: [] },
+     //       where: { name: { [Op.iLike]: `%${q}%` } },
+     //       required: false
+     //     },
+      //    {
+      //      model: Genre,
+      //      as: 'genres',
+      //      through: { attributes: [] },
+      //      where: { name: { [Op.iLike]: `%${q}%` } },
+      //      required: false
+     //     }
+      //  ],
+      //  order: [[sortBy, 'ASC']],
+     //   limit: parseInt(limit, 10),
+    //    offset: parseInt(offset, 10)
+    //  });
 
-      const totalBooks = await Book.count({
-        where: {
-          title: { [Op.iLike]: `%${q}%` }
-        }
-      });
+    //  const totalBooks = await Book.count({
+    //    where: {
+    //      title: { [Op.iLike]: `%${q}%` }
+    //    },
+    //    include: [
+    //      {
+    //        model: Author,
+    //        as: 'authors',
+    //        through: { attributes: [] },
+    //        where: { name: { [Op.iLike]: `%${q}%` } },
+    //        required: false
+    //      },
+     //     {
+     //       model: Genre,
+     //       as: 'genres',
+     //       through: { attributes: [] },
+     //       where: { name: { [Op.iLike]: `%${q}%` } },
+     //       required: false
+     //     }
+    //   ]
+    // });
 
-      const totalPages = Math.ceil(totalBooks / limit);
+    // res.json({
+    //   page: parseInt(page),
+    //   totalPages: Math.ceil(totalBooks / limit),
+    //   totalBooks,
+    //   books
+    // });
+  // } catch (error) {
+  //   console.error('Erreur searchBooks:', error);
+  //   res.status(500).json({ error: 'Erreur lors de la recherche de livres' });
+  // }
+// }
 
-      res.json({ page: parseInt(page), totalPages, totalBooks, books });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Erreur lors de la recherche de livres' });
-    }
-  },
-
-}
+};
