@@ -9,7 +9,7 @@ import { registerSchema } from "../schemas/register.schema.js";
 export const userAuthentificationController = {
   async register(req, res) {
     try {
-      const { name, email, password, firstname } = Joi.attempt(req.body, registerSchema);
+      const { name, email, password, firstname, age } = Joi.attempt(req.body, registerSchema);
 
       const isUserExists = await User.findOne({
         where: { email }
@@ -25,6 +25,7 @@ export const userAuthentificationController = {
         name,
         email,
         firstname,
+        age,
         password: hashedPassword,
         // role_id: userRole.id // si tu veux ajouter le rôle plus tard
       });
@@ -73,8 +74,9 @@ export const userAuthentificationController = {
   async getMe(req, res) {
     try {
       const user = await User.findOne({
-        where: { email: req.user.email },
-        attributes: ["name", "email", "firstname"]
+        // where: { email: req.user.email },
+        where: { id: req.user.id },
+        attributes: ["name", "email", "firstname", "age"]
       });
 
       if (!user) {

@@ -107,8 +107,7 @@ export const bookController = {
       results = [...results, ...(await Book.findAll({
         where: {
           [Op.or]: [
-            { title: { [Op.iLike]: `%${searchTerm}%` } },
-            { synopsis: { [Op.iLike]: `%${searchTerm}%` } },
+            { title: { [Op.iLike]: `%${searchTerm}%` } }
           ]
         },
         include: [{ model: Author, as: "authors" }, { model: Genre, as: "genres" }],
