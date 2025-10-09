@@ -5,32 +5,51 @@ import { User } from "../models/user.model.js";
 import { loginSchema } from "../schemas/login.schema.js";
 import { registerSchema } from "../schemas/register.schema.js";
 
-
 export const userAuthentificationController = {
   async register(req, res) {
     try {
       const { name, email, password, firstname, age } = Joi.attempt(req.body, registerSchema);
-
+      
       const isUserExists = await User.findOne({
         where: { email }
       });
-
+      
       if (isUserExists) {
         return res.status(409).json({ error: "User already exists" });
       }
 
       const hashedPassword = await argon2.hash(password);
-
+      
       const newUser = await User.create({
         name,
         email,
         firstname,
         age,
         password: hashedPassword,
-        // role_id: userRole.id // si tu veux ajouter le rôle plus tard
       });
 
-      res.status(201).json({ message: "Compte créé", name: newUser.name });
+      // ✅ Générer le token
+      const token = jwt.sign(
+        { 
+          email: newUser.email,
+          id: newUser.id
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+
+      // ✅ Renvoyer le token ET l'utilisateur
+      res.status(201).json({ 
+        message: "Compte créé",
+        token,
+        user: {
+          id: newUser.id,
+          name: newUser.name,
+          firstname: newUser.firstname,
+          email: newUser.email,
+          age: newUser.age
+        }
+      });
     } catch (error) {
       console.error("Erreur register :", error);
       res.status(500).json({ error: "Erreur serveur" });
@@ -40,7 +59,7 @@ export const userAuthentificationController = {
   async login(req, res) {
     try {
       const { email, password } = Joi.attempt(req.body, loginSchema);
-
+      
       const user = await User.findOne({
         where: { email },
       });
@@ -50,7 +69,7 @@ export const userAuthentificationController = {
       }
 
       const isPasswordValid = await argon2.verify(user.password, password);
-
+      
       if (!isPasswordValid) {
         return res.status(403).json({ error: "Password is incorrect" });
       }
@@ -64,7 +83,18 @@ export const userAuthentificationController = {
         { expiresIn: "1h" }
       );
 
-      res.status(200).json({ message: "Utilisateur connecté", token });
+      // ✅ Renvoyer le token ET l'utilisateur
+      res.status(200).json({ 
+        message: "Utilisateur connecté",
+        token,
+        user: {
+          id: user.id,
+          name: user.name,
+          firstname: user.firstname,
+          email: user.email,
+          age: user.age
+        }
+      });
     } catch (error) {
       console.error("Erreur login :", error);
       res.status(500).json({ error: "Erreur serveur" });
@@ -74,9 +104,8 @@ export const userAuthentificationController = {
   async getMe(req, res) {
     try {
       const user = await User.findOne({
-        // where: { email: req.user.email },
         where: { id: req.user.id },
-        attributes: ["name", "email", "firstname", "age"]
+        attributes: ["id", "name", "email", "firstname", "age", "avatar"]
       });
 
       if (!user) {
@@ -84,7 +113,6 @@ export const userAuthentificationController = {
       }
 
       res.status(200).json(user);
-
     } catch (error) {
       console.error("Erreur getMe :", error);
       res.status(500).json({ error: "Erreur serveur" });
