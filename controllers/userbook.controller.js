@@ -1,6 +1,6 @@
 
 
-import { User, Book, UserBook } from '../models/index.js';
+import { User, Book, UserBook, Author } from '../models/index.js';
 
 
 
@@ -26,7 +26,11 @@ export const userbookController = {
       const userbooks = await UserBook.findAll({
         where: { user_id: user.id },
         include: [
-          { model: Book, as: "book" },
+          { model: Book, as: "book",
+            include: [
+              { model: Author, as: "authors" }
+            ]
+          }
         ],
         order: [[{ model: Book, as: "book" }, 'title', 'ASC']],
         limit,
