@@ -19,3 +19,23 @@ const fileFilter = (req, file, cb) => {
 const avatarUpload = multer({ storage: avatarStorage, fileFilter });
 
 export default avatarUpload;
+
+
+
+
+
+
+//  name: "Lecteur",
+//   firstname: "Léon",
+//   email: "leon@blablabook.fr",
+//   password: "Livre123!",
+//   age: 34,
+//   avatar: [fichier image type JPEG ou PNG]
+
+//   "name": "Romancier",
+//   "firstname": "Clara",
+//   "email": "clara.romancier@blablabook.fr",
+//   "password": "PlumeDorée2025!",
+//   "confirm": "PlumeDorée2025!",
+//   "age": 28,
+//   "avatar": 

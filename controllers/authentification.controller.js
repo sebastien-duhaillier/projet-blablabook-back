@@ -9,37 +9,38 @@ export const userAuthentificationController = {
   async register(req, res) {
     try {
       const { name, email, password, firstname, age } = Joi.attempt(req.body, registerSchema);
-      
+
       const isUserExists = await User.findOne({
         where: { email }
       });
-      
+
       if (isUserExists) {
         return res.status(409).json({ error: "User already exists" });
       }
 
       const hashedPassword = await argon2.hash(password);
-      
+
       const newUser = await User.create({
         name,
         email,
         firstname,
         age,
         password: hashedPassword,
+        avatar: req.file ? req.file.path : null
       });
 
       // ✅ Générer le token
       const token = jwt.sign(
-        { 
+        {
           email: newUser.email,
           id: newUser.id
         },
         process.env.JWT_SECRET,
-        { expiresIn: "1h" }
+        { expiresIn: "7d" }
       );
 
       // ✅ Renvoyer le token ET l'utilisateur
-      res.status(201).json({ 
+      res.status(201).json({
         message: "Compte créé",
         token,
         user: {
@@ -47,7 +48,8 @@ export const userAuthentificationController = {
           name: newUser.name,
           firstname: newUser.firstname,
           email: newUser.email,
-          age: newUser.age
+          age: newUser.age,
+          avatar: newUser.avatar
         }
       });
     } catch (error) {
@@ -59,7 +61,7 @@ export const userAuthentificationController = {
   async login(req, res) {
     try {
       const { email, password } = Joi.attempt(req.body, loginSchema);
-      
+
       const user = await User.findOne({
         where: { email },
       });
@@ -69,7 +71,7 @@ export const userAuthentificationController = {
       }
 
       const isPasswordValid = await argon2.verify(user.password, password);
-      
+
       if (!isPasswordValid) {
         return res.status(403).json({ error: "Password is incorrect" });
       }
@@ -80,11 +82,11 @@ export const userAuthentificationController = {
           id: user.id
         },
         process.env.JWT_SECRET,
-        { expiresIn: "1h" }
+        { expiresIn: "7d" }
       );
 
       // ✅ Renvoyer le token ET l'utilisateur
-      res.status(200).json({ 
+      res.status(200).json({
         message: "Utilisateur connecté",
         token,
         user: {
