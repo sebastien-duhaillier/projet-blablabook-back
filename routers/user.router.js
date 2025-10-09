@@ -9,7 +9,7 @@ import upload from "../middlewares/uploadCover.middleware.js";
 
 export const userRouter = Router();
 
-userRouter.post('/user/register', userAuthentificationController.register);
+userRouter.post('/user/register', avatarUpload.single('avatar'), userAuthentificationController.register);
 
 userRouter.post('/user/login', userAuthentificationController.login);
 
@@ -21,7 +21,7 @@ userRouter.get('/users', userController.getUsers);
 
 userRouter.get('/user/:id', userController.getUserById);
 
-userRouter.post('/user/:userId/avatar', upload.single('avatar'), userController.userAvatar);
+// userRouter.post('/user/:userId/avatar', upload.single('avatar'), userController.userAvatar);
 
 
 
@@ -29,3 +29,13 @@ userRouter.post('/user/:userId/avatar', upload.single('avatar'), userController.
 // /me
 // /me/books
 // /me/books/:id
+
+// {
+//   "name": "Explorateur",
+//   "firstname": "Nina",
+//   "email": "nina.exploratrice@blablabook.fr",
+//   "password": "VoyageLittéraire2025!",
+//   "confirm": "VoyageLittéraire2025!",
+//   "age": 26,
+//   "avatar": [fichier image JPEG ou PNG — par exemple une carte ou un globe stylisé]
+// }
