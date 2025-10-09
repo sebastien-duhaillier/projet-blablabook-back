@@ -1,14 +1,23 @@
+
+
 import { User, Book, UserBook } from '../models/index.js';
 
-export const userbookController = {
 
+
+
+
+export const userbookController = {
   async getBooks(req, res) {
+    console.log('🔍 getBooks appelé');
+    console.log('👤 req.user:', req.user);
+
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 10;
     const offset = (page - 1) * limit;
 
     try {
       const user = await User.findByPk(req.user.id);
+      console.log('👤 User trouvé:', user ? user.id : 'null');
 
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
@@ -44,7 +53,8 @@ export const userbookController = {
 
   async addBookToUserList(req, res) {
     try {
-      const { userId, bookId, toRead } = req.params;
+      const { userId, bookId } = req.params;
+      const { toRead } = req.body;
 
       if (!userId || !bookId) {
         return res.status(400).json({ message: "userId et bookId sont requis" });
@@ -81,24 +91,123 @@ export const userbookController = {
     }
   },
 
-  //  notre méthode ici permet de supprimer un livre de la booklist
+  async removeBookFromUserList(req, res) {
+    try {
+      const { userId, bookId } = req.params;
 
-  // async deleteBookFromUser(req, res) {
-  //    try {
-  //       const { userId, bookId } = req.params;
-  //       const user = await User.findByPk(userId);
-  //       const book = await Book.findByPk(bookId);
+      if (!userId || !bookId) {
+        return res.status(400).json({ message: "userId et bookId sont requis" });
+      }
 
-  //       if (!user || !book) {
-  //          return res.status(404).json({ error: 'User or book not found' });
-  //       }
+      const user = await User.findByPk(userId);
+      if (!user) return res.status(404).json({ message: "Utilisateur non trouvé." });
 
-  //       await user.removeBook(book);
-  //       res.status(200).json({ message: 'Book successfully removed from user' });
-  //    } catch (error) {
-  //       console.error(error);
-  //       res.status(500).json({ error: 'Internal server error' });
-  //    }
-  // },
+      const book = await Book.findByPk(bookId);
+      if (!book) return res.status(404).json({ message: "Livre non trouvé." });
+
+      const deleted = await UserBook.destroy({
+        where: { user_id: userId, book_id: bookId }
+      });
+
+      if (deleted) {
+        return res.status(200).json({
+          message: "Livre retiré de la booklist avec succès."
+        });
+      } else {
+        return res.status(404).json({ 
+          message: "Livre non trouvé dans la booklist." 
+        });
+      }
+
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ 
+        error: "Erreur serveur", 
+        message: error.message 
+      });
+    }
+  },
+
+  async updateReadStatus(req, res) {
+    try {
+      const { userId, bookId } = req.params;
+      const { toRead } = req.body;
+
+      if (!userId || !bookId) {
+        return res.status(400).json({ message: "userId et bookId sont requis" });
+      }
+
+      if (typeof toRead !== 'boolean') {
+        return res.status(400).json({ message: "toRead doit être un booléen" });
+      }
+
+      const user = await User.findByPk(userId);
+      if (!user) return res.status(404).json({ message: "Utilisateur non trouvé." });
+
+      const book = await Book.findByPk(bookId);
+      if (!book) return res.status(404).json({ message: "Livre non trouvé." });
+
+      const [updated] = await UserBook.update(
+        { toRead },
+        { where: { user_id: userId, book_id: bookId } }
+      );
+
+      if (updated) {
+        return res.status(200).json({
+          message: "Statut de lecture mis à jour avec succès."
+        });
+      } else {
+        return res.status(404).json({ 
+          message: "Livre non trouvé dans la booklist." 
+        });
+      }
+
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ 
+        error: "Erreur serveur", 
+        message: error.message 
+      });
+    }
+  },
+
+  async checkBookStatus(req, res) {
+    try {
+      const { userId, bookId } = req.params;
+
+      if (!userId || !bookId) {
+        return res.status(400).json({ message: "userId et bookId sont requis" });
+      }
+
+      const user = await User.findByPk(userId);
+      if (!user) return res.status(404).json({ message: "Utilisateur non trouvé." });
+
+      const book = await Book.findByPk(bookId);
+      if (!book) return res.status(404).json({ message: "Livre non trouvé." });
+
+      const userbook = await UserBook.findOne({
+        where: { user_id: userId, book_id: bookId }
+      });
+
+      if (userbook) {
+        return res.status(200).json({ 
+          inBooklist: true, 
+          toRead: userbook.toRead 
+        });
+      } else {
+        return res.status(200).json({ 
+          inBooklist: false, 
+          toRead: false 
+        });
+      }
+
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ 
+        error: "Erreur serveur", 
+        message: error.message 
+      });
+    }
+  }
 
 };
