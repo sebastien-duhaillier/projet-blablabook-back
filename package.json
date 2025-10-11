@@ -5,12 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "node --watch index.js",
     "db:create": "node ./migrations/01.create-tables.js",
     "db:seed": "node ./migrations/02.seed-tables.js",
-    "db:reset": "npm run db:create && npm run db:seed"
+    "db:reset": "npm run db:create && npm run db:seed",
+    "test:unit": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --testPathPatterns=unit.test",
+    "test:spec": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest --testPathPatterns=spec.test --setupFilesAfterEnv=./src/config/setup-jest.js"
   },
   "repository": {
     "type": "git",
@@ -33,5 +34,9 @@
     "multer": "^2.0.2",
     "pg": "^8.16.3",
     "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "cross-env": "^10.1.0",
+    "jest": "^30.2.0"
   }
 }
