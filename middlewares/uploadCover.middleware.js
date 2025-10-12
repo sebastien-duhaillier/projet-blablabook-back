@@ -31,5 +31,3 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 export default upload;
 
-
-//  Ce fichier pourrait-il nous servir également pour gérer les avatars des users ?
