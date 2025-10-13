@@ -15,7 +15,7 @@ export const userAuthentificationController = {
       });
 
       if (isUserExists) {
-        return res.status(409).json({ error: "User already exists" });
+        return res.status(409).json({ error: "Utilisateur déjà existant" });
       }
 
       const hashedPassword = await argon2.hash(password);
@@ -67,7 +67,7 @@ export const userAuthentificationController = {
       });
 
       if (!user) {
-        return res.status(404).json({ error: "User does not exist" });
+        return res.status(404).json({ error: "Utilisateur n'existe pas" });
       }
 
       const isPasswordValid = await argon2.verify(user.password, password);
@@ -111,7 +111,7 @@ export const userAuthentificationController = {
       });
 
       if (!user) {
-        return res.status(404).json({ error: "User does not exist" });
+        return res.status(404).json({ error: "Utilisateur n'existe pas" });
       }
 
       res.status(200).json(user);
