@@ -2,9 +2,6 @@ import multer from 'multer';
 import path from 'path';
 
 
-
-
-
 // Définir le stockage
 const storage = multer.diskStorage({
    destination: (req, file, cb) => {

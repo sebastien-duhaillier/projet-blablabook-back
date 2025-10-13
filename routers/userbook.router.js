@@ -5,12 +5,10 @@ import { authenticate } from '../middlewares/authentification.middleware.js';
 export const userbookRouter = Router();
 
 
-
-// Dans votre userbook.router.js
 userbookRouter.delete('/user/:userId/book/:bookId', userbookController.removeBookFromUserList);
 userbookRouter.put('/user/:userId/book/:bookId', userbookController.updateReadStatus);
 userbookRouter.get('/user/:userId/book/:bookId/status', userbookController.checkBookStatus);
 
 userbookRouter.get('/userbooks', authenticate, userbookController.getBooks);
 userbookRouter.post('/user/:userId/book/:bookId', userbookController.addBookToUserList);
-// userbookRouter.delete('/user/:userId/book/:bookId', userbookController.deleteBookFromUser);
+// userbookRouter.delete('/admin/user/:userId/book/:bookId', userbookController.deleteBookFromUser);

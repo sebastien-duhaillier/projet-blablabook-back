@@ -11,18 +11,18 @@ import { sequelize } from "./sequelize.client.js";
 // ASSOCIATIONS MANY-TO-MANY
 // ==============================
 
-// 📚 Un utilisateur peut avoir plusieurs livres
+// Un utilisateur peut avoir plusieurs livres
 // Et un livre peut appartenir à plusieurs utilisateurs
 
 
-UserBook.belongsTo(User, { 
-   foreignKey: 'user_id', 
-   as: 'user' 
+UserBook.belongsTo(User, {
+   foreignKey: 'user_id',
+   as: 'user'
 });
 
-User.hasMany(UserBook, { 
-   foreignKey: 'user_id', 
-   as: 'userBooks' 
+User.hasMany(UserBook, {
+   foreignKey: 'user_id',
+   as: 'userBooks'
 });
 
 User.belongsToMany(Book, {
@@ -47,7 +47,7 @@ Book.hasMany(UserBook, {
    as: "userBooks"
 });
 
-// 🎭 Un genre peut regrouper plusieurs livres
+//  Un genre peut regrouper plusieurs livres
 // Et un livre peut appartenir à plusieurs genres
 Genre.belongsToMany(Book, {
    through: "belongs_to",            // Table de liaison entre Genre et Book
@@ -63,7 +63,7 @@ Book.belongsToMany(Genre, {
    as: "genres"                      // book.getGenres(), book.addGenre()
 });
 
-// ✍️ Un auteur peut avoir écrit plusieurs livres
+// Un auteur peut avoir écrit plusieurs livres
 // Et un livre peut avoir plusieurs auteurs (co-écriture)
 Author.belongsToMany(Book, {
    through: "written_by",           // Table de liaison entre Author et Book
