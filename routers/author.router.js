@@ -5,4 +5,3 @@ export const authorRouter = Router();
 
 authorRouter.get('/authors', authorController.getAllAuthors);
 authorRouter.get('/author/:id', authorController.getAuthorById);
-

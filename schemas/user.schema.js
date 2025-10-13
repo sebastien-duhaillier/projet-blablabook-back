@@ -1,11 +1,6 @@
 import Joi from "joi";
 
-
-
 export const createUserSchema = Joi.object({
-
-
-
    name: Joi.string().trim().min(2).required(),
    firstname: Joi.string().trim().min(2).required(),
    age: Joi.number().integer().min(0).max(120),

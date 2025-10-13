@@ -11,4 +11,3 @@ userbookRouter.get('/user/:userId/book/:bookId/status', userbookController.check
 
 userbookRouter.get('/userbooks', authenticate, userbookController.getBooks);
 userbookRouter.post('/user/:userId/book/:bookId', userbookController.addBookToUserList);
-// userbookRouter.delete('/admin/user/:userId/book/:bookId', userbookController.deleteBookFromUser);

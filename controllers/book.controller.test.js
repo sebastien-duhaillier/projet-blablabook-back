@@ -45,7 +45,7 @@ describe('bookController.getAllBooks', () => { //le 'describe' permet de regroup
 // pour clarifier un peu l'organisation des tests , j'ai dabord voulu faire un dossier 'tests' ,mais au final, j'ai préféré mettre ces derniers à côté des controllers pour un accès plus rapide, je suis peut-être un peu féniant aussi ...
 
 
-// // pour ce test précis j'ai simulé (mocké) les méthodes findAll et count de Sequelize, le "const req = {
+// pour ce test précis j'ai simulé (mocké) les méthodes findAll et count de Sequelize, le "const req = {
 //          query: {
 //             page: "1",
 //             limit: "2"

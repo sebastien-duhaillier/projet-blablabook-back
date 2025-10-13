@@ -1,10 +1,10 @@
-# 🏗️ Architecture du projet BlaBlaBook (Backend)
+# Architecture du projet BlaBlaBook (Backend)
 
 Ce projet suit une architecture **MVC (Modèle - Vue - Contrôleur)** adaptée à une API REST avec Express.js. L’objectif est de garantir une structure claire, maintenable et évolutive.
 
 ---
 
-## 📁 Structure des dossiers
+## Structure des dossiers
 
 ```bash
 blablabook-backend/
