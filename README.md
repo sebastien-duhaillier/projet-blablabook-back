@@ -29,6 +29,7 @@
 - **CSS personnalisé** + charte graphique responsive
 - **Composants dynamiques** : carrousel, boutons d’action, searchbar
 - **Gestion des états utilisateur** : token, redirection, affichage conditionnel
+- **Vitest** : pour les tests d'intégration
 
 ### Backend
 - **Node.js + Express**
@@ -37,6 +38,8 @@
 - **Argon2 pour le hachage des mots de passe**
 - **Multer pour l’upload des avatars et couvertures**
 - **Architecture RESTful** avec routes modulaires
+- **Jest et cross-env** pour les tests unitaires
+
 
 ---
 
@@ -47,8 +50,17 @@
 -  Upload d’avatar et de couverture de livre
 -  Barre de recherche dynamique
 -  Page “mon compte” avec affichage limité et boutons interactifs
--  Carrousel de livres sur la page d’accueil
 -  Interface responsive et accessible (ARIA, mobile-first)
+
+---
+
+##  Pré-requis
+- **Node.js** >= 18
+- **npm** ou **yarn**
+- **PostgreSQL** >= 14
+- **Git** pour cloner le projet
+- **Jest** pour procéder aux tests du projet
+- **dotenv** pour les variables d'environnement
 
 ---
 
@@ -58,8 +70,11 @@
 # Backend
 cd backend
 npm install
+npm run db:create
+npm run db:seed
 npm run dev
 ```
+Ensuite, créer un fichier ```.env``` à la racine du dossier backend en se basant sur le fichier ```.env.example```.
 
 [Accès vers le repo du côté Front](https://github.com/O-clock-Cambridge/projet-blablabook)
 

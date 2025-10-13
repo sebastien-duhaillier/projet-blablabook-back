@@ -22,14 +22,14 @@ describe('bookController.getAllBooks', () => { //le 'describe' permet de regroup
          session: {} // ici on remet la session vide pour éviter les erreurs
       };
       const res = {
-         json: jest.fn()
+         json: jest.fn() //fn permet de créer une fonction factice pour vérifier si elle a été appelée avec les bons arguments
       };
 
       await bookController.getAllBooks(req, res); // dans req ici 
 
-      expect(Book.findAll).toHaveBeenCalled();
-      expect(Book.count).toHaveBeenCalled();
-      expect(res.json).toHaveBeenCalledWith({
+      expect(Book.findAll).toHaveBeenCalled(); // on vérifie que la méthode findAll a bien été appelée
+      expect(Book.count).toHaveBeenCalled(); // on vérifie que la méthode count a bien été appelée
+      expect(res.json).toHaveBeenCalledWith({ // pareil pour la methode json de res
          page: 1,
          totalPages: 1,
          totalBooks: 2,
@@ -40,8 +40,9 @@ describe('bookController.getAllBooks', () => { //le 'describe' permet de regroup
       });
    });
 });
-// et maintenant pour tester il faut lancer la commande 'npm test' dans le terminal
-// pour clarifier un peu l'organisation des tests , j'ai dabord voulu faire un dossier 'tests' ,mais au final, j'ai préféré mettre ces derniers à côté pour un accès plus rapide, je suis peut-être un peu féniant aussi
+// et maintenant pour tester il faut lancer la commande 'npm test -- --verbose' dans le terminal
+
+// pour clarifier un peu l'organisation des tests , j'ai dabord voulu faire un dossier 'tests' ,mais au final, j'ai préféré mettre ces derniers à côté des controllers pour un accès plus rapide, je suis peut-être un peu féniant aussi ...
 
 
 // // pour ce test précis j'ai simulé (mocké) les méthodes findAll et count de Sequelize, le "const req = {

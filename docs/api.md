@@ -14,13 +14,13 @@
 | POST | `/user/register` | Inscription utilisateur avec avatar | `avatarUpload.single('avatar')` |
 | POST | `/user/login` | Connexion utilisateur | Aucun |
 | GET | `/auth/me` | Récupère l'utilisateur connecté | `authenticate` |
-| POST | `/user` | Crée un utilisateur | Aucun |
-| GET | `/users` | Récupère tous les utilisateurs | Aucun |
+| POST | `/admin/user` | Crée un utilisateur | Aucun |
+| GET | `/admin/users` | Récupère tous les utilisateurs | Aucun |
 | GET | `/user/:id` | Récupère un utilisateur par ID | Aucun |
 | POST | `/user/:userId/book/:bookId` | Ajoute un livre à la liste de l'utilisateur | Aucun |
 | GET | `/user/:userId/book/:bookId/status` | Vérifie le statut de lecture d’un livre | Aucun |
-| PUT | `/user/:userId/book/:bookId` | Met à jour le statut de lecture | Aucun |
-| DELETE | `/user/:userId/book/:bookId` | Supprime un livre de la liste de l'utilisateur | Aucun |
+| PUT | `/admin/user/:userId/book/:bookId` | Met à jour le statut de lecture | Aucun |
+| DELETE | `/admin/user/:userId/book/:bookId` | Supprime un livre de la liste de l'utilisateur | Aucun |
 | GET | `/userbooks` | Récupère tous les livres de l'utilisateur connecté | `authenticate` |
 
-<!-- Ceci est juste un premier tableau simplement pour nous mettre sur la voie d'une bonne documentation -->
+<!-- Ceci est juste un premier tableau simplement pour nous mettre sur la voie d'une bonne documentation , tout à fait modifiable....-->
