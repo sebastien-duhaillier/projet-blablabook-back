@@ -24,7 +24,7 @@ Book.init({
       }
    },
    synopsis: {
-      type: DataTypes.STRING(255),
+      type: DataTypes.STRING(800),
       allowNull: false
    }
 }, {

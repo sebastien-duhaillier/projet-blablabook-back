@@ -2,13 +2,10 @@ import multer from 'multer';
 import path from 'path';
 
 
-
-
-
 // Définir le stockage
 const storage = multer.diskStorage({
    destination: (req, file, cb) => {
-      cb(null, 'uploads/'); // dossier où les fichiers seront enregistrés
+      cb(null, 'uploads/books/images/'); // dossier où les fichiers seront enregistrés
    },
    filename: (req, file, cb) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -31,5 +28,3 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({ storage, fileFilter });
 export default upload;
 
-
-//  Ce fichier pourrait-il nous servir également pour gérer les avatars des users ?

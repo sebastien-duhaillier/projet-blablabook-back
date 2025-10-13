@@ -6,5 +6,5 @@ export const httpStatusCodes = {
    NOT_FOUND: 404,
    INTERNAL_SERVER_ERROR: 500,
    FORBIDDEN: 403,
-   IM_A_TEAPOT: 418,
+   // IM_A_TEAPOT: 418,
 };
