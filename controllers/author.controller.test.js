@@ -3,7 +3,7 @@ import { authorController } from './author.controller.js';
 import { Author } from '../models/index.js';
 
 // on va tester la methode getAllAuthors
-describe('atuhorController.getAllAthors', () => {
+describe('authorController.getAllAuthors', () => {
    beforeEach(() => {
       jest.restoreAllMocks();
    }); // ici la même chose que pour notre bookController, on réinitialise les mocks
