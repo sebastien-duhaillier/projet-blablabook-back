@@ -220,8 +220,8 @@ await book18.addAuthor(author17); // Endymion → Dan Simmons
 await book19.addAuthor(author18); // Seigneur des Anneaux → J.R.R. Tolkien
 await book20.addAuthor(author19); // Conan → Robert E. Howard
 
-// Voici notre table de liaison concernant book → genre
 
+// Voici notre table de liaison concernant book → genre
 
 await book2.addGenre(genre2);   // Orgueil et Préjugés → Romance
 await book3.addGenre(genre3);   // Wild → Autobiographie

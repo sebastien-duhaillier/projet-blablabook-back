@@ -1,15 +1,9 @@
-
-
 import { User, Book, UserBook, Author } from '../models/index.js';
-
-
-
-
 
 export const userbookController = {
   async getBooks(req, res) {
-    console.log('🔍 getBooks appelé');
-    console.log('👤 req.user:', req.user);
+    // console.log('getBooks appelé');
+    // console.log('req.user:', req.user);
 
     const page = parseInt(req.query.page, 10) || 1;
     const limit = parseInt(req.query.limit, 10) || 10;
@@ -17,7 +11,7 @@ export const userbookController = {
 
     try {
       const user = await User.findByPk(req.user.id);
-      console.log('👤 User trouvé:', user ? user.id : 'null');
+      // console.log('User trouvé:', user ? user.id : 'null');
 
       if (!user) {
         return res.status(404).json({ error: 'User not found' });
@@ -49,7 +43,7 @@ export const userbookController = {
         userbooks
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       res.status(500).json({ error: 'Erreur lors de la récupération de la booklist' });
     }
 
@@ -90,7 +84,7 @@ export const userbookController = {
       });
 
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       return res.status(500).json({ error: "Erreur serveur", error: error.message });
     }
   },
@@ -124,7 +118,7 @@ export const userbookController = {
       }
 
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       return res.status(500).json({ 
         error: "Erreur serveur", 
         message: error.message 
@@ -167,7 +161,7 @@ export const userbookController = {
       }
 
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       return res.status(500).json({ 
         error: "Erreur serveur", 
         message: error.message 
@@ -206,7 +200,7 @@ export const userbookController = {
       }
 
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       return res.status(500).json({ 
         error: "Erreur serveur", 
         message: error.message 

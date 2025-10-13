@@ -29,7 +29,7 @@ export const userAuthentificationController = {
         avatar: req.file ? req.file.path : null
       });
 
-      // ✅ Générer le token
+      // Générer le token
       const token = jwt.sign(
         {
           email: newUser.email,
@@ -39,7 +39,7 @@ export const userAuthentificationController = {
         { expiresIn: "7d" }
       );
 
-      // ✅ Renvoyer le token ET l'utilisateur
+      // Renvoyer le token ET l'utilisateur
       res.status(201).json({
         message: "Compte créé",
         token,
@@ -85,7 +85,7 @@ export const userAuthentificationController = {
         { expiresIn: "7d" }
       );
 
-      // ✅ Renvoyer le token ET l'utilisateur
+      // Renvoyer le token ET l'utilisateur
       res.status(200).json({
         message: "Utilisateur connecté",
         token,

@@ -14,7 +14,6 @@ UserBook.init({
   toRead: {
     type: DataTypes.BOOLEAN,
     allowNull: false
-    // Prévoir potentiel ajout d'une valeur par défaut
   }
 }, {
   sequelize,
