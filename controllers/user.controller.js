@@ -61,26 +61,6 @@ export const userController = {
     }
   },
 
-  //  notre méthode ici permet d'ajouter un livre à la booklist
-  // async addBookToUser(req, res) {
-  //    ry {
-  //       const { userId, bookId } = req.params;
-  //       const user = await User.findByPk(userId);
-  //       const book = await Book.findByPk(bookId);
-
-  //       if (!user || !book) {
-  //          return res.status(404).json({ error: 'User or book not found' });
-  //       }
-
-  //       await user.addBook(book);
-  //       res.status(200).json({ message: 'Book successfully added to user' });
-  //    } catch (error) {
-  //       console.error(error);
-  //       res.status(500).json({ error: 'Internal server error' });
-  //    }
-  // },
-
-
   async userAvatar(req, res) {
 
     try {

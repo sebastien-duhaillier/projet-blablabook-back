@@ -11,4 +11,3 @@ bookRouter.get('/catalog', bookController.getAllBooks);
 bookRouter.get('/book/:id', bookController.getBookById);
 bookRouter.post('/books/:id/cover', upload.single('cover'), bookController.uploadCover);
 
-//  attention à bien être cohérents au niveau des nommage de routes....

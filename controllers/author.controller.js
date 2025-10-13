@@ -1,6 +1,4 @@
-import { Book, Author, Genre } from '../models/index.js';
-import { Sequelize } from 'sequelize';
-import Joi from 'joi';
+import { Author } from '../models/index.js';
 
 export const authorController = {
 
@@ -29,5 +27,3 @@ export const authorController = {
       }
    },
 };
-
-// Il nous manque les méthodes pour lier les book avec le genres et les auteurs

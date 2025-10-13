@@ -20,22 +20,3 @@ userRouter.post('/user', userController.createUser);
 userRouter.get('/users', userController.getUsers);
 
 userRouter.get('/user/:id', userController.getUserById);
-
-// userRouter.post('/user/:userId/avatar', upload.single('avatar'), userController.userAvatar);
-
-
-
-// Références pour nommer les endpoints
-// /me
-// /me/books
-// /me/books/:id
-
-// {
-//   "name": "Explorateur",
-//   "firstname": "Nina",
-//   "email": "nina.exploratrice@blablabook.fr",
-//   "password": "VoyageLittéraire2025!",
-//   "confirm": "VoyageLittéraire2025!",
-//   "age": 26,
-//   "avatar": [fichier image JPEG ou PNG — par exemple une carte ou un globe stylisé]
-// }

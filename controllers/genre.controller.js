@@ -1,4 +1,4 @@
-import { Book, Author, Genre } from '../models/index.js';
+import { Genre } from '../models/index.js';
 
 
 export const genreController = {

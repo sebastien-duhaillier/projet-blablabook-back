@@ -5,6 +5,3 @@ export const loginSchema = Joi.object({
    password: Joi.string().required()
 });
 
-
-// attention aux restrictions à ce qu'elles soient justifiées, .com .net etc... sûrement à revoir
-// et améliorer le password
