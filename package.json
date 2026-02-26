@@ -12,8 +12,7 @@
     "db:reset": "npm run db:create && npm run db:seed",
     "db:migrate": "node ./migrations/01.create-tables.js",
     "test": "cross-env NODE_ENV=test NODE_OPTIONS=--experimental-vm-modules jest",
-    "build": "echo 'No build step required for Node.js'",
-    "postinstall": "npm run db:migrate"
+    "build": "echo 'No build step required for Node.js'"
   },
   "repository": {
     "type": "git",
