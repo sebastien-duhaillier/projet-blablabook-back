@@ -13,10 +13,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configuration CORS pour la production
+const allowedOrigins = process.env.FRONTEND_URL 
+  ? process.env.FRONTEND_URL.split(',') 
+  : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173'];
+
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? process.env.FRONTEND_URL 
-    : ['http://localhost:5173', 'http://localhost:3000', 'http://localhost:4173'],
+  origin: (origin, callback) => {
+    // Autoriser les requêtes sans origin (ex: Postman, Railway healthcheck)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes('*') || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(null, true); // temporairement tout autoriser jusqu'au déploiement du front
+  },
   credentials: true,
   optionsSuccessStatus: 200
 };
